@@ -14,9 +14,15 @@ export class InMemoryUsersRepository implements IUsersRepository {
     return this.users.find(user => user.id === user_id);
   }
 
-  async create(data: ICreateUserDTO): Promise<User> {
+  async create({name, email, password}: ICreateUserDTO): Promise<User> {
     const user = new User();
-    Object.assign(user, data);
+
+    Object.assign(user, ({
+      name, 
+      email, 
+      password
+    }));
+
     this.users.push(user);
     return user;
   }

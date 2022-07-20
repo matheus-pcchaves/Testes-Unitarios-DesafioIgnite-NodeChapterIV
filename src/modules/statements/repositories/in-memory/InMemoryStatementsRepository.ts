@@ -7,10 +7,13 @@ import { IStatementsRepository } from "../IStatementsRepository";
 export class InMemoryStatementsRepository implements IStatementsRepository {
   private statements: Statement[] = [];
 
-  async create(data: ICreateStatementDTO): Promise<Statement> {
+  async create({ amount, description }: ICreateStatementDTO): Promise<Statement> {
     const statement = new Statement();
 
-    Object.assign(statement, data);
+    Object.assign(statement, ({
+      amount,
+      description
+    }));
 
     this.statements.push(statement);
 
